@@ -8,10 +8,12 @@ users = pd.read_csv("mapping.csv")
 g = ig.Graph.Read_GraphML("scratch_network.graphml")
 print(f"Graph has {g.vcount()} nodes and {g.ecount()} edges.")
 
+
 communities = la.find_partition(
-    g, 
-    la.ModularityVertexPartition, 
-    seed=42  # for reproducibility
+    g,
+    la.RBConfigurationVertexPartition, 
+    resolution_parameter=3, 
+    seed=42
 )
 
 memberships=communities.membership
